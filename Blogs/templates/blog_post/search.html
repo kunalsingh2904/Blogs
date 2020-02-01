@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+{% if query %}
+    <h2>you search for {{query}}</h2>
+
+    {% if blog_list %}
+
+        <ul>
+        {% for item in blog_list %}
+            <li>
+                 <div>
+                 {% if item.image %}
+                    <img src="{{ item.image.url }}" align="left" width="100" height="100">
+                 {% endif %}
+                 <p>Title is: {{item.title}}</p>
+                 <p>slug is :  {{item.slug}}</p>
+                 <p>content is: {{item.content}}</p>
+                 {% if request.user.is_authenticated %}
+                      {% if request.user.is_staff %}
+                           <a href="/blog/{{item.slug}}/edit"><button>update</button></a>
+                           <a href="/blog/{{item.slug}}/delete"><button>Delete</button></a>
+                      {% endif %}
+                 {% endif %}
+                 </div><br><hr>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <h3>sorry, No result found for {{query}}</h3>
+
+    {% endif %}
+
+
+{% else %}
+    <h2>you search for nothing OR no result found, search again:</h2>
+    <form action="/blog/search">
+            <input name="q" type="search" placeholder="search">
+            <button type="submit">Search</button>
+    </form>
+
+{% endif %}
+
+
+
+
+
+{% endblock %}

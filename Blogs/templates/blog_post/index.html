@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+{% if item.image %}
+   <img src="{{ item.image.url }}" align="left" width="100" height="100">
+{% endif %}
+<p><b>Title :</b> {{item.title}}</p>
+<p><b>content :</b> {{item.content}}</p>
+{% if request.user.is_authenticated %}
+     {% if request.user.is_staff or types%}
+          <a href="/blog/{{item.slug}}/edit"><button>update</button></a>
+          <a href="/blog/{{item.slug}}/delete"><button>Delete</button></a>
+     {% endif %}
+{% endif %}
+<br><br>
+<form action="/blog/create/comment/{{ item.slug }}">
+           <input name="comm" type="text" placeholder="Add public comment">
+           <button type="submit">post</button>
+</form>
+<hr><br>
+{% if comment %}
+     <h3>comments:</h3><br>
+
+         {% for obj in comment %}
+            <li>
+                <b>{{obj.user}}:</b>&nbsp;&nbsp;&nbsp; {{obj.comment }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              {% if request.user.is_staff %}
+                    <a href="/blog/del_comment/{{obj.blogs.slug}}/{{obj.id}}/delete"><button>Delete</button></a>
+              {% endif %}
+            </li>
+         {% endfor %}
+
+{% endif %}
+
+
+
+{% endblock %}

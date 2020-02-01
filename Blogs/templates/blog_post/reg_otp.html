@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if title %}
+<h1>{{title}} :</h1>
+{% endif %}
+
+{% if message %}
+    <h2>{{message}}</h2>
+{% else %}
+    <h2>A otp has been sent to {{ email }}</h2><br>
+    <h2>Enter otp to proceed</h2>
+{% endif %}
+<br>
+<form action="/blog/{{username}}/{{number}}/{{password}}/{{email}}"> {% csrf_token %}
+           <input name="num" type="text" placeholder="OTP">
+           <button type="submit">submit</button>
+</form>
+<h3>It can take upto 3 min</h3>
+<h3><a href="/blog/register">Try again</a></h3>
+
+
+{% endblock %}

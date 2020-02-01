@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if title %}
+<h1>{{title}} :</h1>
+
+{% endif %}
+
+<form method="post" action="/blog/contact"> {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">send</button>
+</form>
+
+{% if obj %}
+    <ul>
+        <li>{{obj}}</li>
+
+    </ul>
+{% endif %}
+
+{% endblock %}

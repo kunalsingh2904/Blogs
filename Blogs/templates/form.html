@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if title %}
+<h1>{{title}} :</h1>
+
+{% endif %}
+
+<form method="post" action="/contact"> {% csrf_token %}
+    <ul>
+    <li>
+    Name: <input type="text" name="full_name" placeholder="NAME"></li>
+    <li>
+    E-mail: <input type="email" name="email" placeholder="EMAIL">
+    </li><li>
+    content: <textarea name="content"></textarea>
+    </li>
+    <li><button type="submit">send</button></li></ul>
+</form>
+
+
+{% if obj %}
+    <ul>
+        <li>{{obj}}</li>
+
+    </ul>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if context is not None %}
+    <ul>
+        {% for item in context %}
+            <h3>
+                <div>
+                    <li>
+                        {% if item.image %}
+                            <img src="{{ item.image.url }}" align="left" width="100" height="100">
+                        {% endif %}
+                        <a href="/blog/{{ item.slug }}/detail">{{item.title}}</a>
+                        <h4>{{ item.user.username }}</h4>
+                    </li>
+
+                </div>
+            </h3>
+            <hr width="">
+        {% endfor %}
+    </ul>
+{% else %}
+    <h2>No item/blog</h2>
+{% endif %}
+
+
+{% endblock %}

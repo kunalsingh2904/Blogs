@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if title %}
+<h1>{{title}} :</h1>
+
+{% endif %}
+<h2>Register your account</h2>
+<form method="post" action="/blog/register"> {% csrf_token %}     <!-- action can be '/blog/create/new/' -->
+    {{ form.as_p }}
+    <button type="submit">send</button>
+</form>
+
+<h3>Already a account? <a href="/blog/login">login</a></h3>
+
+
+
+{% endblock %}
